@@ -1,17 +1,31 @@
+import React, { useState } from "react";
 import "./App.css";
-import Dropdown from "./components/Dropdown";
+import DateFilter from "./components/DateFilter";
+import ExpenseList from "./components/ExpenseList";
 import Main from "./components/Main";
 
 function App() {
-  const options = [
-    { label: "식료품", value: "grocery" },
-    { label: "교통비", value: "transport" },
-    { label: "기타", value: "etc" },
-  ];
+  const [expenses, setExpenses] = useState([]);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  const addExpense = (expense) => {
+    setExpenses([{ ...expense, id: Date.now() }, ...expenses]);
+  };
+
+  const filteredByDate = expenses.filter((expense) => {
+    const date = new Date(expense.purchaseDate);
+    return (
+      (!startDate || date >= new Date(startDate)) &&
+      (!endDate || date <= new Date(endDate))
+    );
+  });
+
   return (
     <div className="App">
-      <Main />
-      <Dropdown options={options} />
+      <Main addExpense={addExpense} />
+      <DateFilter setStartDate={setStartDate} setEndDate={setEndDate} />
+      <ExpenseList expenses={filteredByDate} />
     </div>
   );
 }
