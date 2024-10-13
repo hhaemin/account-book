@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ExpenseItem from "./ExpenseItem";
 
-const ExpenseList = ({ expenses }) => {
+const ExpenseList = ({ expenses, startDate, endDate }) => {
   const [sortType, setSortType] = useState("latest");
   const [filterType, setFilterType] = useState("all");
 
@@ -13,9 +13,15 @@ const ExpenseList = ({ expenses }) => {
     return new Date(a.purchaseDate) - new Date(b.purchaseDate);
   });
 
-  const filteredExpenses = sortedExpenses.filter(
-    (expense) => filterType === "all" || expense.type === filterType
-  );
+  const filteredExpenses = sortedExpenses.filter((expense) => {
+    const expenseDate = new Date(expense.purchaseDate);
+    const isWithinDateRange =
+      (!startDate || expenseDate >= new Date(startDate)) &&
+      (!endDate || expenseDate <= new Date(endDate));
+    return (
+      (filterType === "all" || expense.type === filterType) && isWithinDateRange
+    );
+  });
 
   return (
     <div>
@@ -37,9 +43,13 @@ const ExpenseList = ({ expenses }) => {
         </select>
       </div>
 
-      {filteredExpenses.map((expense) => (
-        <ExpenseItem key={expense.id} expense={expenses} />
-      ))}
+      {filteredExpenses.length > 0 ? (
+        filteredExpenses.map((expense) => (
+          <ExpenseItem key={expense.id} expense={expenses} />
+        ))
+      ) : (
+        <p>필터에 맞는 항목이 없습니다.</p>
+      )}
     </div>
   );
 };

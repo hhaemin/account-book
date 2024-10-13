@@ -21,6 +21,14 @@ const Main = ({ addExpense }) => {
       repurchase,
     };
     addExpense(newExpense);
+    // 입력창 초기화
+    setName("");
+    setPrice("");
+    setType("");
+    setPurchaseDate("");
+    setMemo("");
+    setShowMemo(false);
+    setRepurchase(false);
   };
 
   return (

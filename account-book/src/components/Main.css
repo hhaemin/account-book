@@ -1,18 +1,15 @@
 * {
-  margin: 0;
-  padding: 0;
   font-size: 14px;
 }
 
 .expense-form {
   border: 2px solid black;
-  text-align: space-between;
   display: flex;
   flex-direction: column;
   gap: 25px;
   padding: 20px;
   margin: 30px auto;
-  width: 500px;
+  width: 600px;
 }
 
 .expense-form span {
@@ -21,6 +18,14 @@
   width: 200px;
 }
 
+/* .expense-form input {
+  padding-right: 60px;
+} */
+
 .Repurchase label {
   margin-right: 20px;
+}
+
+.submit-btn {
+  padding: 10px;
 }

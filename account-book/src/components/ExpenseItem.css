@@ -1,0 +1,18 @@
+.expense-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.expense-item__name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.expense-item__details {
+  margin-top: 5px;
+}
+
+.expense-item__memo {
+  color: gray;
+}
