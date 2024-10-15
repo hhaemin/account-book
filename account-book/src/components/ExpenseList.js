@@ -6,9 +6,9 @@ const ExpenseList = ({ expenses, startDate, endDate }) => {
   const [filterType, setFilterType] = useState("all");
 
   const sortedExpenses = [...expenses].sort((a, b) => {
-    if (sortType === "가격 높은 순") return b.price - a.price;
-    if (sortType === "가격 낮은 순") return a.price - b.price;
-    if (sortType === "최신 순")
+    if (sortType === "price-high") return b.price - a.price;
+    if (sortType === "price-low") return a.price - b.price;
+    if (sortType === "latest")
       return new Date(b.purchaseDate) - new Date(a.purchaseDate);
     return new Date(a.purchaseDate) - new Date(b.purchaseDate);
   });
@@ -45,7 +45,7 @@ const ExpenseList = ({ expenses, startDate, endDate }) => {
 
       {filteredExpenses.length > 0 ? (
         filteredExpenses.map((expense) => (
-          <ExpenseItem key={expense.id} expense={expenses} />
+          <ExpenseItem key={expense.id} expense={expense} />
         ))
       ) : (
         <p>필터에 맞는 항목이 없습니다.</p>
